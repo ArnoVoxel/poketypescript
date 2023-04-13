@@ -1,10 +1,12 @@
+import { Outlet, Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <div>
       POKEMON TYPESCRIPT
       <nav>
-        <li >ACCUEIL</li>
-        <li >SEARCH</li>
+        <button ><Link to={"/"}>ACCUEIL</Link></button>
+        <button ><Link to={"/search"}>SEARCH</Link></button>
       </nav>
     </div>)
 }

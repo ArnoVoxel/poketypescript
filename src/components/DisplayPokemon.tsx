@@ -1,12 +1,7 @@
+import PokemonResource from "../types/pokemondata.type"
 
-
-type pokemonResource = {
-  id: number
-  name: string,
-}
-
-function DisplayPokemon(pokemon:{name: string, pokemonRequest: pokemonResource}) {
-  let pokemonElement: pokemonResource = pokemon.pokemonRequest;
+function DisplayPokemon(pokemon:{name: string, pokemonRequest: PokemonResource}) {
+  let pokemonElement: PokemonResource = pokemon.pokemonRequest;
   let content: JSX.Element;
   if(pokemonElement.id === 0) {
     content = (<div>Pas de pokemon sélectionné</div>)
@@ -15,6 +10,8 @@ function DisplayPokemon(pokemon:{name: string, pokemonRequest: pokemonResource})
     <div>
       <div>NOM : {pokemonElement.name}</div>
       <div>ID : {pokemonElement.id}</div>
+      <img src={pokemonElement.sprites.front_default} alt='pokemon de face' />
+      <img src={pokemonElement.sprites.back_default} alt='pokemon de dos' />
     </div>
       );
   }
@@ -23,7 +20,6 @@ function DisplayPokemon(pokemon:{name: string, pokemonRequest: pokemonResource})
 
   return (
     <div>
-      un test
       {content}
     </div>
   )

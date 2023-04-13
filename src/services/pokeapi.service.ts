@@ -1,17 +1,17 @@
 import http from "../http-common";
-import IPokemonData from "../types/pokemondata.type"
+import PokemonResource from "../types/pokemondata.type"
 
 class PokemonDataService {
   getAll() {
-    return http.get<Array<IPokemonData>>("/tutorials");
+    return http.get<Array<PokemonResource>>("/tutorials");
   }
 
   get(id: string) {
-    return http.get<IPokemonData>(`/pokemon/${id}`);
+    return http.get<PokemonResource>(`/pokemon/${id}`);
   }
 
   findByName(name: string) {
-    return http.get<any>(`/pokemon/${name}`);
+    return http.get<PokemonResource>(`/pokemon/${name}`);
   }
 }
 

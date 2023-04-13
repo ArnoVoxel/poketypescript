@@ -1,21 +1,14 @@
-import { SetStateAction } from "react";
 import PokeapiService from "../services/pokeapi.service";
+import PokemonResource from "../types/pokemondata.type"
+import SearchPokemonType from "../types/SearchPokemonType";
 
-type pokemonResource = {
-	id: number;
-	name: string;
-};
-
-function SearchPokemon(pokemon: {
-	pokemonName: string;
-	setPokemonName: React.Dispatch<SetStateAction<string>>;
-	setPokemonRequest: React.Dispatch<React.SetStateAction<pokemonResource>>;
-}) {
-	let pokemonRequest: pokemonResource;
+function SearchPokemon(pokemon: SearchPokemonType | any): JSX.Element {
+	let pokemonRequest: PokemonResource;
 	function search() {
 		PokeapiService.findByName(pokemon.pokemonName)
     .then((result) => {
       pokemonRequest = result.data;
+      console.log(pokemonRequest);
       pokemon.setPokemonRequest(pokemonRequest);
     })
     .catch((error) => {
@@ -29,12 +22,19 @@ function SearchPokemon(pokemon: {
 	}
 
 	return (
-		<div>
-			<input type="text" value={pokemon.pokemonName} onChange={handleInput} />
-			<button type="submit" onClick={search}>
-				capturer
-			</button>
-		</div>
+		<div className="App">
+			TEST
+      {/* <SearchPokemon pokemonName={pokemon.pokemonName} setPokemonName={pokemon.setPokemonName} setPokemonRequest={pokemon.setPokemonRequest} /> */}
+      {/* <DisplayPokemon name={pokemonName} pokemonRequest={pokemonRequest} /> */}
+      <header className="App-header">
+				<div>
+					<input type="text" value={pokemon.pokemonName} onChange={handleInput} />
+					<button type="submit" onClick={search}>
+						capturer
+					</button>
+				</div>
+      </header>
+    </div>
 	);
 }
 export default SearchPokemon;
