@@ -11,7 +11,7 @@ class PokemonDataService {
   }
 
   findByName(name: string) {
-    return http.get<Array<IPokemonData>>(`/pokemon/${name}`);
+    return http.get<any>(`/pokemon/${name}`);
   }
 }
 

@@ -1,22 +1,40 @@
 import { SetStateAction } from "react";
 import PokeapiService from "../services/pokeapi.service";
 
-function SearchPokemon(pokemon:{pokemonName: string, setPokemonName: React.Dispatch<SetStateAction<string>>}) {
-  let pokemonRequest:any;
-  const search = (event: React.MouseEvent<HTMLButtonElement>)=> {
-    event.preventDefault();
+type pokemonResource = {
+	id: number;
+	name: string;
+};
 
-    const button = event.target;
-    // pokemon.setPokemonName(input)
-    console.log('clic');
-    console.log(button);
-  }
-  console.log(pokemonRequest);
-  return(
-    <div>
-      <input type="text" />
-      <button onClick={search} >capturer</button>
-    </div>
-  )
+function SearchPokemon(pokemon: {
+	pokemonName: string;
+	setPokemonName: React.Dispatch<SetStateAction<string>>;
+	setPokemonRequest: React.Dispatch<React.SetStateAction<pokemonResource>>;
+}) {
+	let pokemonRequest: pokemonResource;
+	function search() {
+		PokeapiService.findByName(pokemon.pokemonName)
+    .then((result) => {
+      pokemonRequest = result.data;
+      pokemon.setPokemonRequest(pokemonRequest);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert('Ce pokemon '+ pokemon.pokemonName +' n\'existe pas');
+    });
+	}
+
+	function handleInput(e: React.FormEvent<HTMLInputElement>): void {
+		pokemon.setPokemonName(e.currentTarget.value);
+	}
+
+	return (
+		<div>
+			<input type="text" value={pokemon.pokemonName} onChange={handleInput} />
+			<button type="submit" onClick={search}>
+				capturer
+			</button>
+		</div>
+	);
 }
-export default SearchPokemon
+export default SearchPokemon;

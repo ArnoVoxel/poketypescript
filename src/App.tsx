@@ -7,18 +7,16 @@ import './App.css';
 
 function App() {
   const [pokemonName, setPokemonName] = useState('');
-  let searchItem: string = '';
-  let isDisplayed: boolean = false;
-
-  if(pokemonName.length > 0) {
-    isDisplayed = true;
-  }
-
+  const [pokemonRequest, setPokemonRequest] = useState({
+    id:0,
+    name: ''
+  });
+  
   return (
     <div className="App">
       <Navbar />
-      <SearchPokemon pokemonName={pokemonName} setPokemonName={setPokemonName} />
-      <DisplayPokemon name={pokemonName} />
+      <SearchPokemon pokemonName={pokemonName} setPokemonName={setPokemonName} setPokemonRequest={setPokemonRequest} />
+      <DisplayPokemon name={pokemonName} pokemonRequest={pokemonRequest} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <br />
