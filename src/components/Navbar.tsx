@@ -1,12 +1,15 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../styles/Navbar.css";
 
 function Navbar() {
   return (
-    <div>
-      POKEMON TYPESCRIPT
+    <div className="navbar">
+      <div className="title">
+        POKEMON TYPESCRIPT
+      </div>
       <nav>
-        <button ><Link to={"/"}>ACCUEIL</Link></button>
-        <button ><Link to={"/search"}>SEARCH</Link></button>
+        <button className="navbarButton" ><Link to={"/"}>ACCUEIL</Link></button>
+        <button className="navbarButton" ><Link to={"/search"}>SEARCH</Link></button>
       </nav>
     </div>)
 }

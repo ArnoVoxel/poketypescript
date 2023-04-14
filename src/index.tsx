@@ -7,7 +7,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import SearchPokemon from "./components/SearchPokemon";
-import DisplayPokemon from "./components/DisplayPokemon";
+import DetailPokemon from "./components/DetailPokemon";
 
 const router = createBrowserRouter([
 	{
@@ -17,16 +17,11 @@ const router = createBrowserRouter([
   {
     path: "search",
     element: <SearchPokemon />,
-      children:[
-        {
-          path:'search/display',
-          element: <DisplayPokemon name={""} pokemonRequest={undefined} />
-          // element: <div>DISPLAY</div>
-        }
-      ]
-    ,
   },
-  
+  {
+    path: "display",
+    element: <DetailPokemon />,
+  }
 ]);
 
 const root = ReactDOM.createRoot(

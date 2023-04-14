@@ -6,6 +6,19 @@
   height: 40vmin;
   pointer-events: none;
 }
+/* class App-logo-clicked to zoom in image */
+.App-logo-clicked {
+  animation: zoom 2s linear forwards;
+}
+
+@keyframes zoom {
+  0%{
+    transform: scale(0.5);
+  }
+  100%{
+    transform: scale(5);
+  }
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
