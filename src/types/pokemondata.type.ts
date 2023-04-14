@@ -5,4 +5,7 @@ export default interface  pokemonResource {
     back_default: string,
     front_default: string,
   },
+  types: {
+    name: string,
+  }[],
 }

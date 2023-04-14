@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
         {
           path:'search/display',
           element: <DisplayPokemon name={""} pokemonRequest={undefined} />
+          // element: <div>DISPLAY</div>
         }
       ]
     ,
