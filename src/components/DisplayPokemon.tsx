@@ -1,6 +1,6 @@
 import PokemonResource from "../types/pokemondata.type"
 
-function DisplayPokemon(pokemon:{name: string, pokemonRequest: PokemonResource}) {
+function DisplayPokemon(pokemon:{name: string, pokemonRequest: PokemonResource | any}) {
   let pokemonElement: PokemonResource = pokemon.pokemonRequest;
   let content: JSX.Element;
   if(pokemonElement.id === 0) {

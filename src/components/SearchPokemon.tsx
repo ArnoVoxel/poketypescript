@@ -1,37 +1,60 @@
+import { Outlet, Link } from "react-router-dom";
+import { useState } from "react";
+import Navbar from '../components/Navbar';
 import PokeapiService from "../services/pokeapi.service";
-import PokemonResource from "../types/pokemondata.type"
-import SearchPokemonType from "../types/SearchPokemonType";
+import DisplayPokemon from "./DisplayPokemon";
 
-function SearchPokemon(pokemon: SearchPokemonType | any): JSX.Element {
-	let pokemonRequest: PokemonResource;
+function SearchPokemon(): JSX.Element {
+	const [pokemonName, setPokemonName] = useState('');
+	const [pokemonRequest, setPokemonRequest] = useState({
+																								name:'',
+																								id:0,
+																								sprites: {
+																									back_default: '',
+																									front_default: '',
+																								},
+																							});
+  // let pokemonRequest: PokemonResource = {
+	// 	name:'',
+	// 	id:0,
+	// 	sprites: {
+	// 		back_default: '',
+	// 		front_default: '',
+	// 	},
+	// };
+	
 	function search() {
-		PokeapiService.findByName(pokemon.pokemonName)
+		PokeapiService.findByName(pokemonName)
     .then((result) => {
-      pokemonRequest = result.data;
+      setPokemonRequest(result.data);
+      console.log(result.data);
       console.log(pokemonRequest);
-      pokemon.setPokemonRequest(pokemonRequest);
     })
     .catch((error) => {
       console.log(error);
-      alert('Ce pokemon '+ pokemon.pokemonName +' n\'existe pas');
+      alert('Ce pokemon '+ pokemonName +' n\'existe pas');
     });
 	}
 
 	function handleInput(e: React.FormEvent<HTMLInputElement>): void {
-		pokemon.setPokemonName(e.currentTarget.value);
+		setPokemonName(e.currentTarget.value);
 	}
 
 	return (
 		<div className="App">
-			TEST
-      {/* <SearchPokemon pokemonName={pokemon.pokemonName} setPokemonName={pokemon.setPokemonName} setPokemonRequest={pokemon.setPokemonRequest} /> */}
-      {/* <DisplayPokemon name={pokemonName} pokemonRequest={pokemonRequest} /> */}
+			<Navbar />
       <header className="App-header">
 				<div>
-					<input type="text" value={pokemon.pokemonName} onChange={handleInput} />
+					<p>Entrez un nom ou un numéro : </p>
+					<input type="text" value={pokemonName} onChange={handleInput} />
 					<button type="submit" onClick={search}>
 						capturer
 					</button>
+					<button ><Link to={"/search/display"}>SEARCH</Link></button>
+				</div>
+				<br />
+				<div>
+					<DisplayPokemon name={pokemonName} pokemonRequest={pokemonRequest} />
 				</div>
       </header>
     </div>

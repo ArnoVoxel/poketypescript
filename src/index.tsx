@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,24 +7,25 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import SearchPokemon from "./components/SearchPokemon";
+import DisplayPokemon from "./components/DisplayPokemon";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
-		children: [
-			{
-				path: "search",
-				element: <SearchPokemon />
-				,
-			},
-			// {
-			// 	path: "pokemon/:pokemonName",
-			// 	element: <DisplayPokemon name={""} pokemonRequest={} />,
-			// },
-		],
 	},
-
+  {
+    path: "search",
+    element: <SearchPokemon />,
+      children:[
+        {
+          path:'search/display',
+          element: <DisplayPokemon name={""} pokemonRequest={undefined} />
+        }
+      ]
+    ,
+  },
+  
 ]);
 
 const root = ReactDOM.createRoot(
