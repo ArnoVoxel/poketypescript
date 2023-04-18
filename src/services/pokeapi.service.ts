@@ -1,18 +1,23 @@
-import http from "../http-common";
-import PokemonResource from "../types/pokemondata.type"
+import PokemonResource from "../types/pokemondata.type";
+import { AxiosInstanceService } from "./axios-instance.service";
 
-class PokemonDataService {
-  getAll() {
-    return http.get<Array<PokemonResource>>("/tutorials");
+class PokemonDataService extends AxiosInstanceService {
+  constructor() {
+    super(`https://pokeapi.co/api/v2`);
   }
 
-  get(id: string) {
-    return http.get<PokemonResource>(`/pokemon/${id}`);
+  getAll() {
+    return this.get<Array<PokemonResource>>("/tutorials");
+  }
+
+  getById(id: string) {
+    return this.get<PokemonResource>(`/pokemon/${id}`);
   }
 
   findByName(name: string) {
-    return http.get<PokemonResource>(`/pokemon/${name}`);
+    return this.get<PokemonResource>(`/pokemon/${name}`);
   }
 }
 
-export default new PokemonDataService();
+const pokemonDataService = new PokemonDataService();
+export default pokemonDataService;
